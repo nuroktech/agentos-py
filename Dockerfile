@@ -1,5 +1,7 @@
 FROM python:3.11.8-slim-bullseye
 
+RUN apt-get update && apt-get install -y git
+
 ENV PYTHONUNBUFFERED True
 
 ENV APP_HOME /app
