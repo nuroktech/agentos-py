@@ -1,4 +1,4 @@
-FROM python:3.11.8-slim-bullseye
+FROM python:3.11-slim
 
 RUN apt-get update && apt-get install -y git
 
@@ -8,9 +8,8 @@ ENV APP_HOME /app
 WORKDIR $APP_HOME
 COPY . ./
 
-ENV PORT 8000
-
 RUN pip install --no-cache-dir -r requirements.txt
 
-# As an example here we're running the web service with one worker on uvicorn.
-CMD exec uvicorn server:app --host 0.0.0.0 --port ${PORT} --workers 1
+ENV PORT 8000
+
+ENTRYPOINT ["bash", "./runtime/launch_kernel.sh"]
